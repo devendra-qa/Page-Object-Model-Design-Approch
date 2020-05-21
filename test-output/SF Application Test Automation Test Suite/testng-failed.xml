@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [SF Application Test Automation Test Suite]">
+  <listeners>
+    <listener class-name="com.sf.qa.ExtentReportListener.ExtentReporterNG"/>
+  </listeners>
+  <test thread-count="5" name="SF Application Test Cases(failed)">
+    <classes>
+      <class name="com.sf.qa.tests.LeadsPageTest">
+        <methods>
+          <include name="tearDown"/>
+          <include name="requiredFieldsTest"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- com.sf.qa.tests.LeadsPageTest -->
+    </classes>
+  </test> <!-- SF Application Test Cases(failed) -->
+</suite> <!-- Failed suite [SF Application Test Automation Test Suite] -->
