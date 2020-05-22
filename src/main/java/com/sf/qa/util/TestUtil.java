@@ -19,7 +19,7 @@ import com.sf.qa.base.TestBase;
 public class TestUtil extends TestBase {
 
 	public static long PAGE_LOAD_TIMEOUT = 100;
-	public static long IMPLICITE_WAIT = 10;
+	public static long IMPLICITE_WAIT = 20;
 
 	public static String TESTDATA_SHEET_PATH = "D:\\UdemyWS\\SFTest\\src\\main\\java\\com\\sf\\qa\\testdata\\SFTestData.xlsx";
 

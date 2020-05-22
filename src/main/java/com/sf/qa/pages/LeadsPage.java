@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.sf.qa.base.TestBase;
 
@@ -18,7 +20,7 @@ public class LeadsPage extends TestBase{
 	@FindBy(xpath="//li[contains(text(),'These required fields must be completed: Company,')]")
 	WebElement requiredFieldMsg;
 	
-	@FindBy(css="button[title='Save']")
+	@FindBy(xpath="//button[@title='Save']")
 	WebElement saveBtn;
 	
 	public LeadsPage(){
@@ -45,6 +47,8 @@ public class LeadsPage extends TestBase{
 		
 		public String validateRequiredFields(){
 			//driver.findElement(By.cssSelector("button[title='Save']")).click();
+			WebDriverWait wait = new WebDriverWait(driver,20);
+			wait.until(ExpectedConditions.visibilityOf(requiredFieldMsg));
 			String msg = requiredFieldMsg.getText();
 			return msg;
 
