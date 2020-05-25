@@ -1,97 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="2" total="3" passed="0">
+<testng-results skipped="0" failed="0" ignored="7" total="8" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="173983" started-at="2020-05-21T12:27:39Z" finished-at="2020-05-21T12:30:33Z">
+  <suite name="Default suite" duration-ms="172043" started-at="2020-05-25T08:31:59Z" finished-at="2020-05-25T08:34:51Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="173983" started-at="2020-05-21T12:27:39Z" finished-at="2020-05-21T12:30:33Z">
+    <test name="Default test" duration-ms="172043" started-at="2020-05-25T08:31:59Z" finished-at="2020-05-25T08:34:51Z">
       <class name="com.sf.qa.tests.LeadsPageTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.LeadsPageTest@598067a5]" name="setUp" is-config="true" duration-ms="149089" started-at="2020-05-21T12:27:39Z" finished-at="2020-05-21T12:30:09Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.LeadsPageTest@3c0ecd4b]" name="setUp" is-config="true" duration-ms="165841" started-at="2020-05-25T08:31:59Z" finished-at="2020-05-25T08:34:45Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="requiredFieldsTest()[pri:2, instance:com.sf.qa.tests.LeadsPageTest@598067a5]" name="requiredFieldsTest" duration-ms="23583" started-at="2020-05-21T12:30:09Z" finished-at="2020-05-21T12:30:32Z">
-          <exception class="org.openqa.selenium.NoSuchElementException">
-            <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//li[contains(text(),'These required fields must be completed: Company,')]"}
-  (Session info: chrome=81.0.4044.138)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
-System info: host: 'NGL010915', ip: '192.168.43.60', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 81.0.4044.138, chrome: {chromedriverVersion: 81.0.4044.138 (8c6c7ba89cc9..., userDataDir: C:\Users\DEVEND~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:51653}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
-Session ID: 50a640e74ecbebd128ec91de3863eae7
-*** Element info: {Using=xpath, value=//li[contains(text(),'These required fields must be completed: Company,')]}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//li[contains(text(),'These required fields must be completed: Company,')]"}
-  (Session info: chrome=81.0.4044.138)
-For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
-System info: host: 'NGL010915', ip: '192.168.43.60', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 81.0.4044.138, chrome: {chromedriverVersion: 81.0.4044.138 (8c6c7ba89cc9..., userDataDir: C:\Users\DEVEND~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:51653}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
-Session ID: 50a640e74ecbebd128ec91de3863eae7
-*** Element info: {Using=xpath, value=//li[contains(text(),'These required fields must be completed: Company,')]}
-at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-at java.lang.reflect.Constructor.newInstance(Unknown Source)
-at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
-at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
-at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
-at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
-at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-at java.lang.reflect.Method.invoke(Unknown Source)
-at org.openqa.selenium.support.events.EventFiringWebDriver.lambda$new$1(EventFiringWebDriver.java:105)
-at com.sun.proxy.$Proxy8.findElement(Unknown Source)
-at org.openqa.selenium.support.events.EventFiringWebDriver.findElement(EventFiringWebDriver.java:194)
-at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
-at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at com.sun.proxy.$Proxy12.getText(Unknown Source)
-at com.sf.qa.pages.LeadsPage.validateRequiredFields(LeadsPage.java:48)
-at com.sf.qa.tests.LeadsPageTest.requiredFieldsTest(LeadsPageTest.java:70)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-at java.lang.reflect.Method.invoke(Unknown Source)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-at org.testng.TestRunner.privateRun(TestRunner.java:648)
-at org.testng.TestRunner.run(TestRunner.java:505)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
-at org.testng.SuiteRunner.run(SuiteRunner.java:364)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
-at org.testng.TestNG.runSuites(TestNG.java:1049)
-at org.testng.TestNG.run(TestNG.java:1017)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+        <test-method status="PASS" signature="salutationPicklistValuesTest()[pri:5, instance:com.sf.qa.tests.LeadsPageTest@3c0ecd4b]" name="salutationPicklistValuesTest" duration-ms="4893" started-at="2020-05-25T08:34:45Z" finished-at="2020-05-25T08:34:50Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- requiredFieldsTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.LeadsPageTest@598067a5]" name="tearDown" is-config="true" duration-ms="1261" started-at="2020-05-21T12:30:32Z" finished-at="2020-05-21T12:30:33Z">
+        </test-method> <!-- salutationPicklistValuesTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.LeadsPageTest@3c0ecd4b]" name="tearDown" is-config="true" duration-ms="1267" started-at="2020-05-25T08:34:50Z" finished-at="2020-05-25T08:34:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

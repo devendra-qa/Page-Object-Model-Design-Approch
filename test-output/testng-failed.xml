@@ -5,8 +5,8 @@
     <classes>
       <class name="com.sf.qa.tests.LeadsPageTest">
         <methods>
+          <include name="salutationPicklistValuesTest"/>
           <include name="tearDown"/>
-          <include name="requiredFieldsTest"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- com.sf.qa.tests.LeadsPageTest -->

@@ -18,7 +18,6 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import com.sf.qa.base.TestBase;
 
-
 public class WebEventListener extends TestBase implements WebDriverEventListener {
 
 	public void beforeNavigateTo(String url, WebDriver driver) {
@@ -129,32 +128,32 @@ public class WebEventListener extends TestBase implements WebDriverEventListener
 
 	public <X> void afterGetScreenshotAs(OutputType<X> arg0, X arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void afterGetText(WebElement arg0, WebDriver arg1, String arg2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void afterSwitchToWindow(String arg0, WebDriver arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public <X> void beforeGetScreenshotAs(OutputType<X> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void beforeGetText(WebElement arg0, WebDriver arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void beforeSwitchToWindow(String arg0, WebDriver arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

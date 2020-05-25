@@ -18,14 +18,15 @@ public class TestBase {
 
 	public static WebDriver driver;
 	public static Properties prop;
-	public  static EventFiringWebDriver e_driver;
+	public static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
 
 	public TestBase() {
 		prop = new Properties();
 		FileInputStream fis;
 		try {
-			fis = new FileInputStream("D:\\UdemyWS\\SFTest\\src\\main\\java\\com\\sf\\qa\\config\\config.properties");
+			//fis = new FileInputStream("D:\\UdemyWS\\SFTest\\src\\main\\java\\com\\sf\\qa\\config\\config.properties");
+			fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\com\\sf\\qa\\config\\config.properties");
 			prop.load(fis);
 
 		} catch (FileNotFoundException e) {
@@ -38,19 +39,21 @@ public class TestBase {
 	public static void initialization() {
 		String browserName = prop.getProperty("browser");
 		if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "D:\\drivers\\chromedriver_win32 (1)\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "D:\\drivers\\chromedriver_win32 (2)\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\lib\\chromedriver\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if (browserName.equals("ff")) {
 			System.setProperty("webdriver.gecko.driver", "D:\\drivers\\geckodriver-v0.21.0-win32\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
-		
+
 		e_driver = new EventFiringWebDriver(driver);
-		// Now create object of EventListerHandler to register it with EventFiringWebDriver
+		// Now create object of EventListerHandler to register it with
+		// EventFiringWebDriver
 		eventListener = new WebEventListener();
 		e_driver.register(eventListener);
 		driver = e_driver;
-		
+
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);

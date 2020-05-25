@@ -8,33 +8,60 @@ import org.testng.Assert;
 
 import com.sf.qa.base.TestBase;
 
-public class HomePage extends TestBase{
+public class HomePage extends TestBase {
 
-	@FindBy(xpath="//span[@class='slds-text-heading_small']")
-	WebElement assistantLabel;
-	
-	@FindBy(xpath="//a[@title='Leads']")
+	@FindBy(xpath = "//div/h2/span[@title='Quarterly Performance']")
+	WebElement quarterlyPerformanceLabel;
+
+	@FindBy(xpath = "//a[@title='Leads']")
 	WebElement leadsTab;
 
-	public HomePage(){
+	@FindBy(xpath = "//a[@title='Contacts']")
+	WebElement contactsTab;
+
+	@FindBy(xpath = "//a[@title='Accounts']")
+	WebElement accountsTab;
+
+	@FindBy(xpath = "//a[@title='Opportunities']")
+	WebElement opportunitiesTab;
+
+	public HomePage() {
 		PageFactory.initElements(driver, this);
 	}
-	
-	//Actions:
-	
-	public String validateHomePageTitle(){
+
+	// Actions:
+
+	public String validateHomePageTitle() {
 		return driver.getTitle();
 
 	}
-	
-	public boolean validateAssistantLabel(){
-		return assistantLabel.isDisplayed();
+
+	public boolean validateQuarterlyPerformanceLabel() {
+		return quarterlyPerformanceLabel.isDisplayed();
 	}
-	
-	public LeadsPage clickOnLeadsTab(){
+
+	public LeadsPage clickOnLeadsTab() {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", leadsTab);
-		//leadsTab.click();
+		// leadsTab.click();
 		return new LeadsPage();
+	}
+
+	public AccountsPage clickOnAccountsTab() {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", accountsTab);
+		return new AccountsPage();
+	}
+
+	public ContactsPage clickOnContactsTab() {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", contactsTab);
+		return new ContactsPage();
+	}
+
+	public OpportunitiesPage clickOnOpportunitiesTab() {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", opportunitiesTab);
+		return new OpportunitiesPage();
 	}
 }
