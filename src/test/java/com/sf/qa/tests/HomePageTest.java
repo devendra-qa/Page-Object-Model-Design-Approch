@@ -36,7 +36,7 @@ public class HomePageTest extends TestBase {
 		initialization();
 		loginPage = new LoginPage();
 		homePage = new HomePage();
-		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		homePage = loginPage.validateLogin(prop.getProperty("username"), prop.getProperty("password"));
 		try {
 			Thread.sleep(100000);
 		} catch (InterruptedException e) {

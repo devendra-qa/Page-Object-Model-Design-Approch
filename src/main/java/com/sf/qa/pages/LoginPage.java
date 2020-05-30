@@ -9,24 +9,24 @@ import com.sf.qa.base.TestBase;
 public class LoginPage extends TestBase {
 
 	// Page Factory -OR:
-
+	// Login page
 	@FindBy(id = "username")
-	WebElement username;
+	WebElement tb_Username;
 
 	@FindBy(name = "pw")
-	WebElement password;
+	WebElement tb_Password;
 
 	@FindBy(css = "#Login")
-	WebElement loginBtn;
+	WebElement btn_Login;
 
 	@FindBy(css = "#logo")
-	WebElement sfLogo;
+	WebElement img_Salesforce;
 
 	@FindBy(xpath = "//a[@id='forgot_password_link']")
-	WebElement forgotPasswordLink;
+	WebElement lnk_ForgotYourPassword;
 
 	@FindBy(xpath = "//a[@id='mydomainLink']")
-	WebElement customDomainLink;
+	WebElement lnk_UseCustomDomain;
 
 	// create constructor of this page class
 	public LoginPage() {
@@ -43,24 +43,24 @@ public class LoginPage extends TestBase {
 		return driver.getTitle();
 	}
 
-	public boolean validateSalesforceLogo() {
-		return sfLogo.isDisplayed();
+	public boolean validateSalesforceImage() {
+		return img_Salesforce.isDisplayed();
 	}
 
-	public HomePage login(String un, String pwd) {
-		username.sendKeys(un);
-		password.sendKeys(pwd);
-		loginBtn.click();
+	public HomePage validateLogin(String un, String pwd) {
+		tb_Username.sendKeys(un);
+		tb_Password.sendKeys(pwd);
+		btn_Login.click();
 		return new HomePage();
 	}
 
 	public String validateForgotPasswordLink() {
-		forgotPasswordLink.click();
+		lnk_ForgotYourPassword.click();
 		return driver.getTitle();
 	}
 
-	public String validateDomainLink() {
-		customDomainLink.click();
+	public String validateUseCustomDomainLink() {
+		lnk_UseCustomDomain.click();
 		return driver.getTitle();
 	}
 

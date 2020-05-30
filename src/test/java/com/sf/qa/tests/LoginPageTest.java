@@ -45,7 +45,7 @@ public class LoginPageTest extends TestBase {
 
 	@Test(priority = 2)
 	public void salesforceLogoTest() {
-		boolean flag = loginPage.validateSalesforceLogo();
+		boolean flag = loginPage.validateSalesforceImage();
 		Assert.assertTrue(flag, "Logo not displayed");
 	}
 
@@ -57,13 +57,13 @@ public class LoginPageTest extends TestBase {
 
 	@Test(priority = 4)
 	public void domainLinkTest() {
-		String title = loginPage.validateDomainLink();
+		String title = loginPage.validateUseCustomDomainLink();
 		Assert.assertEquals(title, "Login | Salesforce", "Page title not matched");
 	}
 
 	@Test(priority = 5)
 	public void loginTest() {
-		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		homePage = loginPage.validateLogin(prop.getProperty("username"), prop.getProperty("password"));
 	}
 
 	@AfterMethod()

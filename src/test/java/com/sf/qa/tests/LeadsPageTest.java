@@ -1,8 +1,10 @@
 package com.sf.qa.tests;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -37,7 +39,7 @@ public class LeadsPageTest extends TestBase {
 		loginPage = new LoginPage();
 		homePage = new HomePage();
 		leadsPage = new LeadsPage();
-		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+		homePage = loginPage.validateLogin(prop.getProperty("username"), prop.getProperty("password"));
 		try {
 			Thread.sleep(100000);
 		} catch (InterruptedException e) {
@@ -49,43 +51,37 @@ public class LeadsPageTest extends TestBase {
 		 * wait.until(ExpectedConditions.titleContains("Home | Salesforce"));
 		 */
 		leadsPage = homePage.clickOnLeadsTab();
-
 	}
 
-	/*
-	 * @Test(priority=1) public void leadsPageTitleTest(){ String title =
-	 * leadsPage.validateLeadsPageTitle(); Assert.assertEquals(title,
-	 * "Home | Salesforce", "Leads page title not matched"); }
-	 */
-
-	@Test(priority = 1) // validate label leads on leads page
-	public void leadsLabelTest() {
-		Assert.assertTrue(leadsPage.validateLeadsLabel(), "Leads label is not displayed");
+	@Test(priority = 1) // validate Leads page title
+	public void pageTitleLeadsTest() {
+		String pageTitle = leadsPage.validatePageTitleLeads();
+		Assert.assertEquals(pageTitle, "Lightning Experience | Salesforce", "Page title does not match");
 	}
 
-	@Test(priority = 2) // validate leads page title
-	public void leadsPageTitleTest() {
-		String pageTitle = leadsPage.validateLeadsPageTitle();
-		Assert.assertEquals(pageTitle, "Lightning Experience | Salesforce", "Page title not matched");
+	@Test(priority = 2) // validate header leads on Leads page
+	public void pageHeaderLeadTest() {
+		Assert.assertTrue(leadsPage.validatePageHeaderLead(), "Page header not displayed");
+		Assert.assertEquals(leadsPage.validatePageHeaderText(), "Leads", "Page header text does not match");
 	}
 
-	@Test(priority = 3) // validate all the fields on new lead window page
+	@Test(priority = 3) // validate all the fields on New Lead window page
 	public void fieldsOnNewLeadWindowTest() {
-		leadsPage.clickOnNewButton();
-		leadsPage.validateNewLeadLabel();
-		leadsPage.validateSalutationPicklist();
-		leadsPage.validateFirstNameTextbox();
-		leadsPage.validateLastNameTextbox();
-		leadsPage.validateCompanyTextbox();
-		leadsPage.validateLeadStatusPicklist();
+		leadsPage.clickNewButton();
+		Assert.assertEquals(leadsPage.validateHeaderNewLead(), "New Lead", "Window header does not match");
+		Assert.assertTrue(leadsPage.validateSalutationPicklist(), "Salutation picklist not exists");
+		Assert.assertTrue(leadsPage.validateFirstNameTextbox(), "First Name textbox not exists");
+		Assert.assertTrue(leadsPage.validateLasttNameTextbox(), "Last Name textbox not exists");
+		Assert.assertTrue(leadsPage.validateCompanyTextbox(), "Company textbox not exists");
+		Assert.assertTrue(leadsPage.validateLeadStatusPicklist(), "Lead Status picklist not exists");
 	}
 
 	@Test(priority = 4) // validate default picklist value
-	public void defaultLeadStatusValueTest() {
-		leadsPage.clickOnNewButton();
-		String defaultValue = leadsPage.validateDefaultLeadStatusValue();
-		Assert.assertEquals(defaultValue, "Open - Not Contacted", "Lead Status value matched");
-
+	public void defaultLeadStatusPicklistValueTest() {
+		leadsPage.clickNewButton();
+		String aDefaultValue = leadsPage.validateDefaultLeadStatusPicklistValue();
+		String eDefaultValue = "Open - Not Contacted";
+		Assert.assertEquals(aDefaultValue, eDefaultValue, "Lead Status default value does not match");
 	}
 
 	@Test(priority = 5)
@@ -94,21 +90,28 @@ public class LeadsPageTest extends TestBase {
 		TestUtil ePicklist = new TestUtil();
 		ArrayList<String> eSalPicklist = ePicklist.getPicklistTestData("leads", "salutation");
 
-		leadsPage.clickOnNewButton();
-		leadsPage.clickOnSalutationPicklist();
+		leadsPage.clickNewButton();
+		leadsPage.clickSalutationPicklist();
 		ArrayList<String> aSalPicklist = leadsPage.validateSalutationPicklistValues();
-		System.out.println("actual picklist: " + aSalPicklist);
-		System.out.println("expected picklist: " + eSalPicklist);
-		Assert.assertEquals(aSalPicklist, eSalPicklist, "Picklist values not matched");
+		/*
+		 * System.out.println("actual picklist: " + aSalPicklist);
+		 * System.out.println("expected picklist: " + eSalPicklist);
+		 */
+		Assert.assertEquals(aSalPicklist, eSalPicklist, "Picklist values does not match");
 	}
 
 	@Test(priority = 6) // required fields validation
-	public void requiredFieldsMsgTest() {
-		leadsPage.clickOnNewButton();
-		leadsPage.clickOnSaveButton();
-		String validationMsg = leadsPage.validateRequiredFieldsMsg();
-		Assert.assertEquals(validationMsg, "These required fields must be completed: Company, Last Name",
-				"Error text matched");
+	public void requiredFieldsErrorMessageTest() {
+		leadsPage.clickNewButton();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		leadsPage.clickSaveButton();
+		String aErrorMsg = leadsPage.validateErrorMessage();
+		String eErrorMsg = "These required fields must be completed: Company, Last Name";
+		Assert.assertEquals(aErrorMsg, eErrorMsg, "Error message does not match");
 	}
 
 	@DataProvider
@@ -117,24 +120,60 @@ public class LeadsPageTest extends TestBase {
 		return data;
 	}
 
-	@Test(priority = 7, dataProvider = "getSFTestData") // validate new lead
-														// creation
+	@Test(priority = 7, dataProvider = "getSFTestData")
 	// public void createNewLeadTest(){
 	public void createNewLeadTest(String salutation, String firstName, String lastName, String company) {
-		leadsPage.clickOnNewButton();
+		leadsPage.clickNewButton();
 		// leadsPage.createNewLead("Mr.", "Devid", "P", "ABP Ltd.");
 		leadsPage.createNewLead(salutation, firstName, lastName, company);
-		leadsPage.clickOnSaveButton();
+		leadsPage.clickSaveButton();
 	}
 
-	@Test(priority = 8) // change lead status value
-	public void changeLeadStatusTest() {
-		driver.findElement(By.xpath("//*[text()='Open - Not Contacted']")).click();
-		driver.findElement(By.xpath("//td[(@class,'slds-cell-edit cellContainer slds-has-focus')]/span/span/button"))
-				.click();
-		driver.findElement(By.xpath("//a[contains(@class,'select')]")).click();
-		driver.findElement(By.xpath("//a[contains(text(),'Working - Contacted')]")).click();
-		driver.findElement(By.xpath("//span[contains(text(),'Save')]")).click();
+	@Test(priority = 8)
+	public void changeLeadStatusToWorkingContactedUsingPathLinkTest() {
+		leadsPage.selectLeadRecord("Open - Not Contacted");
+		leadsPage.clickLeadDetailsTab();
+		leadsPage.selectLeadStatusPathLink("Working - Contacted");
+		leadsPage.clickMarkStatusAsCompleteButton();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test(priority = 9)
+	public void changeLeadStatusToClosedNotConvertedUsingPathLinkTest() {
+		leadsPage.selectLeadRecord("Working - Contacted");
+		leadsPage.clickLeadDetailsTab();
+		leadsPage.selectLeadStatusPathLink("Closed - Not Converted");
+		leadsPage.clickMarkStatusAsCompleteButton();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test(priority = 10)
+	public void changeLeadStatusToConvertedUsingPathLinkTest() {
+		leadsPage.selectLeadRecord("Working - Contacted");
+		leadsPage.clickLeadDetailsTab();
+		leadsPage.selectLeadStatusPathLink("Converted");
+		leadsPage.clickSelectConvertedStatusButton();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		leadsPage.clickConvertButton();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		leadsPage.validateLeadConvertedMessage();
+		leadsPage.clickGotoLeadsButton();
 	}
 
 	@AfterMethod()
