@@ -6,8 +6,8 @@
       <class name="com.sf.qa.tests.AccountsPageTest">
         <methods>
           <include name="tearDown"/>
-          <include name="createNewAccountTest" invocation-numbers="0"/>
           <include name="setUp"/>
+          <include name="createNewOpportunityOnAccountTest"/>
         </methods>
       </class> <!-- com.sf.qa.tests.AccountsPageTest -->
     </classes>

@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
@@ -36,6 +40,22 @@ public class TestUtil extends TestBase {
 
 	public void switchToFrame() {
 		driver.switchTo().frame("");
+	}
+
+	public String getFutureDate() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar cal = Calendar.getInstance();// gets current date
+		// cal.setTime(new Date());
+		cal.add(Calendar.DATE, 5);// add five days
+		String newDate = dateFormat.format(cal.getTime());
+		return newDate;
+	}
+
+	public String getCurrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar cal = Calendar.getInstance();// gets current date
+		String currentDate = dateFormat.format(cal.getTime());
+		return currentDate;
 	}
 
 	public static Object[][] getTestData(String sheetName) {

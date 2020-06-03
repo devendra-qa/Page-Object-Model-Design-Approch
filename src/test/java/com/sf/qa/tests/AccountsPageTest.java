@@ -1,6 +1,7 @@
 package com.sf.qa.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,8 +20,8 @@ public class AccountsPageTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
 	AccountsPage accountsPage;
-	
-	String sheetName = "accounts";
+
+	String sheetName = "opportunities";
 
 	public AccountsPageTest() {
 		super();
@@ -50,7 +51,7 @@ public class AccountsPageTest extends TestBase {
 
 	@Test(priority = 2) // validate header Accounts on Accounts page
 	public void pageHeadeAccountsTest() {
-		Assert.assertEquals(accountsPage.validatePageHeaderAccounts(), "Accounts", "Page header text not matches");
+		Assert.assertEquals(accountsPage.validatePageHeaderAccounts(), "Accounts", "Page header does not match");
 	}
 
 	@Test(priority = 3)
@@ -70,8 +71,10 @@ public class AccountsPageTest extends TestBase {
 		Assert.assertTrue(accountsPage.validatePhoneTextbox(), "Phone textbox not exists");
 		Assert.assertTrue(accountsPage.validateWebsiteTextbox(), "Website textbox not exists");
 		Assert.assertEquals(accountsPage.validateTypePicklist(), "--None--", "Type default value does not match");
-		Assert.assertEquals(accountsPage.validateOwnershipPicklist(), "--None--", "Ownership default value does not match");
-		Assert.assertEquals(accountsPage.validateIndustryPicklist(), "--None--", "Industry default value does not match");
+		Assert.assertEquals(accountsPage.validateOwnershipPicklist(), "--None--",
+				"Ownership default value does not match");
+		Assert.assertEquals(accountsPage.validateIndustryPicklist(), "--None--",
+				"Industry default value does not match");
 		Assert.assertTrue(accountsPage.validateBillingStreetTextbox(), "Billing Street textbox not exists");
 		Assert.assertTrue(accountsPage.validateBillingCityTextbox(), "Billing City textbox not exists");
 		Assert.assertTrue(accountsPage.validateBillingStateTextbox(), "Billing State textbox not exists");
@@ -98,7 +101,7 @@ public class AccountsPageTest extends TestBase {
 		String eErrorMsg = "These required fields must be completed: Account Name";
 		Assert.assertEquals(aErrorMsg, eErrorMsg, "Error message doen not match");
 	}
-	
+
 	@DataProvider
 	public Object[][] getSFTestData() {
 		Object data[][] = TestUtil.getTestData(sheetName);
@@ -106,9 +109,14 @@ public class AccountsPageTest extends TestBase {
 	}
 
 	@Test(priority = 7, dataProvider = "getSFTestData")
-	public void createNewAccountTest(String accountName, String rating, String phone, String website, String type, String ownership, String industry, String billingStreet, String billingCity, String billingState, String billingZip, String billingCountry, String shippingStreet, String shippingCity, String shippingState, String shippingZip, String shippingCountry, String active) {
+	public void createNewAccountTest(String accountName, String rating, String phone, String website, String type,
+			String ownership, String industry, String billingStreet, String billingCity, String billingState,
+			String billingZip, String billingCountry, String shippingStreet, String shippingCity, String shippingState,
+			String shippingZip, String shippingCountry, String active) {
 		accountsPage.clickNewButton();
-		accountsPage.createNewAccount(accountName, rating, phone, website, type, ownership, industry, billingStreet, billingCity, billingState, billingZip, billingCountry, shippingStreet, shippingCity, shippingState, shippingZip, shippingCountry, active);
+		accountsPage.createNewAccount(accountName, rating, phone, website, type, ownership, industry, billingStreet,
+				billingCity, billingState, billingZip, billingCountry, shippingStreet, shippingCity, shippingState,
+				shippingZip, shippingCountry, active);
 		accountsPage.clickSaveButton();
 		try {
 			Thread.sleep(10000);
@@ -117,6 +125,36 @@ public class AccountsPageTest extends TestBase {
 		}
 	}
 
+	@Test
+	public void selectAccountNameTest() {
+		accountsPage.selectAccountName("ABC Corp");
+	}
+
+	/*@DataProvider
+	public Object[][] getSFTestData() {
+		Object data[][] = TestUtil.getTestData(sheetName);
+		return data;
+	}*/
+	@Test(priority = 9, dataProvider = "getSFTestData")
+	public void createNewOpportunityOnAccountTest(String opportunityName, String type, String leadSource, String amount, String closeDate,
+			String stage, String description) {
+		accountsPage.selectAccountName("ABC Corp");
+		accountsPage.validateRelatedTabOnAccountIsSelected();
+		accountsPage.clickOpportunitiesRelatedListLink();
+		accountsPage.clickNewButtonOnOpportunityRelatedList();
+		/*try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}*/
+		accountsPage.createNewOpportunityOnAccount("ABC Corp "+opportunityName, type, leadSource, amount, closeDate, stage, description);
+		accountsPage.clickSaveOpportunityButtton();
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@AfterMethod()
 	public void tearDown() {

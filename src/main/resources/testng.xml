@@ -11,6 +11,7 @@
 			<class name="com.sf.qa.tests.LoginPageTest" />
 			<class name="com.sf.qa.tests.HomePageTest" />
 			<class name="com.sf.qa.tests.LeadsPageTest" />
+			<!-- <class name="com.sf.qa.tests.sampleTest" /> -->
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
