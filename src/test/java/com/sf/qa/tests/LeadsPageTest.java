@@ -55,8 +55,9 @@ public class LeadsPageTest extends TestBase {
 
 	@Test(priority = 1) // validate Leads page title
 	public void pageTitleLeadsTest() {
-		String pageTitle = leadsPage.validatePageTitleLeads();
-		Assert.assertEquals(pageTitle, "Lightning Experience | Salesforce", "Page title does not match");
+		String aTitle = leadsPage.validatePageTitleLeads();
+		String eTitle = "Lightning Experience | Salesforce";
+		Assert.assertEquals(aTitle, eTitle, "Page title does not match");
 	}
 
 	@Test(priority = 2) // validate header leads on Leads page

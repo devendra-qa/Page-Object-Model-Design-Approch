@@ -25,7 +25,7 @@ public class LeadsPage extends TestBase {
 	WebElement pghdr_Leads;
 
 	@FindBy(xpath = "//div[contains(text(),'New')]")
-	WebElement btn_New;
+	WebElement btn_NewLead;
 
 	@FindBy(xpath = "//div[contains(text(),'Change Status')]")
 	WebElement btn_ChangeStatus;
@@ -89,10 +89,10 @@ public class LeadsPage extends TestBase {
 	WebElement btn_Cancel;
 
 	@FindBy(xpath = "//button[@title='Save & New']")
-	WebElement btn_SaveAndNew;
+	WebElement btn_SaveAndNewLead;
 
 	@FindBy(xpath = "//button[@title='Save']")
-	WebElement btn_Save;
+	WebElement btn_SaveLead;
 
 	@FindBy(xpath = "//ul[@class='errorsList']/li")
 	WebElement msgError;
@@ -136,7 +136,7 @@ public class LeadsPage extends TestBase {
 	}
 
 	public void clickNewButton() {
-		btn_New.click();
+		btn_NewLead.click();
 	}
 
 	public boolean validateHeaderNewLead() {
@@ -172,7 +172,7 @@ public class LeadsPage extends TestBase {
 	}
 
 	public void clickSaveButton() {
-		btn_Save.click();
+		btn_SaveLead.click();
 	}
 
 	public void clickCancelButton() {

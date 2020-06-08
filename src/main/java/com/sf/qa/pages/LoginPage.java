@@ -7,9 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 import com.sf.qa.base.TestBase;
 
 public class LoginPage extends TestBase {
+	/*
+	 * tb- textbox, ta- textarea, pl- picklist, tab- tab, lnk- link, btn- button, img-
+	 * image, msg- message, pghdr- page header, hdr- header
+	 */
 
 	// Page Factory -OR:
-	// Login page
+	// Login Page OR
 	@FindBy(id = "username")
 	WebElement tb_Username;
 
@@ -37,7 +41,7 @@ public class LoginPage extends TestBase {
 		PageFactory.initElements(driver, this);
 	}
 
-	// Actions:
+	// Login Page Actions:
 
 	public String validateLoginPageTitle() {
 		return driver.getTitle();
@@ -45,13 +49,6 @@ public class LoginPage extends TestBase {
 
 	public boolean validateSalesforceImage() {
 		return img_Salesforce.isDisplayed();
-	}
-
-	public HomePage validateLogin(String un, String pwd) {
-		tb_Username.sendKeys(un);
-		tb_Password.sendKeys(pwd);
-		btn_Login.click();
-		return new HomePage();
 	}
 
 	public String validateForgotPasswordLink() {
@@ -62,6 +59,13 @@ public class LoginPage extends TestBase {
 	public String validateUseCustomDomainLink() {
 		lnk_UseCustomDomain.click();
 		return driver.getTitle();
+	}
+
+	public HomePage validateLogin(String un, String pwd) {
+		tb_Username.sendKeys(un);
+		tb_Password.sendKeys(pwd);
+		btn_Login.click();
+		return new HomePage();
 	}
 
 }

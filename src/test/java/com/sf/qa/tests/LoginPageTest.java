@@ -35,34 +35,35 @@ public class LoginPageTest extends TestBase {
 	}
 
 	@Test(priority = 1)
-	public void loginPageTitleTest() {
-		String title = loginPage.validateLoginPageTitle();
-		// Assert.assertEquals(title, "Login | Salesforce");
-
+	public void verifyLoginPageTitleTest() {
+		String aTitle = loginPage.validateLoginPageTitle();
+		String eTitle = "Login | Salesforce";
 		// display message only if test case failed
-		Assert.assertEquals(title, "Login | Salesforce", "Login page title not matched");
+		Assert.assertEquals(aTitle, eTitle, "Login page title not matched");
 	}
 
 	@Test(priority = 2)
-	public void salesforceLogoTest() {
+	public void verifySalesforceLogoTest() {
 		boolean flag = loginPage.validateSalesforceImage();
 		Assert.assertTrue(flag, "Logo not displayed");
 	}
 
 	@Test(priority = 3)
-	public void forgotPasswordLinkTest() {
-		String title = loginPage.validateForgotPasswordLink();
-		Assert.assertEquals(title, "Forgot Your Password | Salesforce", "Page title not matched");
+	public void verifyForgotPasswordLinkTest() {
+		String aTitle = loginPage.validateForgotPasswordLink();
+		String eTitle = "Forgot Your Password | Salesforce";
+		Assert.assertEquals(aTitle, eTitle, "Page title not matched");
 	}
 
 	@Test(priority = 4)
-	public void domainLinkTest() {
-		String title = loginPage.validateUseCustomDomainLink();
-		Assert.assertEquals(title, "Login | Salesforce", "Page title not matched");
+	public void verifyUseCustomDomainLinkTest() {
+		String aTitle = loginPage.validateUseCustomDomainLink();
+		String eTitle = "Login | Salesforce";
+		Assert.assertEquals(aTitle, eTitle, "Page title not matched");
 	}
 
 	@Test(priority = 5)
-	public void loginTest() {
+	public void verifyUserLoginTest() {
 		homePage = loginPage.validateLogin(prop.getProperty("username"), prop.getProperty("password"));
 	}
 

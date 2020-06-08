@@ -1,5 +1,11 @@
 package com.sf.qa.util;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -156,6 +162,74 @@ public class TestUtil extends TestBase {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String currentDir = System.getProperty("user.dir");
 		FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
+	}
+
+	// file upload utility
+	/*
+	 * This method will set any parameter string to the system's clipboard.
+	 */
+	public static void setClipboardData(String path) {
+
+		//String path = "file_name";
+		StringSelection strSelection = new StringSelection(path);
+		//Getting clipboard as file upload window	
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        //Copying string file name to the file upload window
+        clipboard.setContents(strSelection, null);
+		System.out.println("selection: " +strSelection);
+	}
+
+	public static void uploadFile(String fileLocation) {
+		Robot robot = null;
+		try {
+			// Setting clipboard with file location
+			setClipboardData(fileLocation);
+			// Create object of Robot class
+			robot = new Robot();
+			  
+	        robot.delay(2000);
+	        robot.keyPress(KeyEvent.VK_ENTER);
+	        robot.keyRelease(KeyEvent.VK_ENTER);
+	        robot.delay(2000); 
+	        robot.keyPress(KeyEvent.VK_CONTROL);
+	        robot.keyPress(KeyEvent.VK_V);
+	        robot.keyRelease(KeyEvent.VK_V);
+	        robot.keyRelease(KeyEvent.VK_CONTROL); //paste the copied string into the dialog box
+	        robot.keyPress(KeyEvent.VK_ENTER);
+	        //robot.delay(150);
+	        robot.keyRelease(KeyEvent.VK_ENTER);
+		} catch (Exception exp) {
+			exp.printStackTrace();
+		}
+	}
+	
+	public static void scrollPageUp(){
+		Robot robot = null;	
+		try {
+			robot = new Robot();
+			/*robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_END);
+			robot.keyRelease(KeyEvent.VK_END);
+			robot.delay(30000);
+			robot.keyRelease(KeyEvent.VK_CONTROL);*/
+			robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+			robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+			//robot.delay(3000);
+		
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//code snippet to capture page load time
+	public static void pageLoadTime(String url){
+		long start = System.currentTimeMillis();
+		driver.get(url);		
+		long finish = System.currentTimeMillis();
+		long totalTime = finish - start;
+		System.out.println("Total time for page load: " +totalTime);
+		
 	}
 
 }

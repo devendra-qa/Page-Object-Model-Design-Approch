@@ -4,26 +4,33 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.sf.qa.base.TestBase;
 
 public class HomePage extends TestBase {
-
+	
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	
+	@FindBy(xpath = "//a[@title='Home']")
+	WebElement tab_Home;
+	
 	@FindBy(xpath = "//div/h2/span[@title='Quarterly Performance']")
-	WebElement quarterlyPerformanceLabel;
+	WebElement hdr_quarterlyPerformance;
 
 	@FindBy(xpath = "//a[@title='Leads']")
-	WebElement leadsTab;
+	WebElement tab_Leads;
 
 	@FindBy(xpath = "//a[@title='Contacts']")
-	WebElement contactsTab;
+	WebElement tab_Contacts;
 
 	@FindBy(xpath = "//a[@title='Accounts']")
-	WebElement accountsTab;
+	WebElement tab_Accounts;
 
 	@FindBy(xpath = "//a[@title='Opportunities']")
-	WebElement opportunitiesTab;
+	WebElement tab_Opportunities;
 
 	public HomePage() {
 		PageFactory.initElements(driver, this);
@@ -35,33 +42,38 @@ public class HomePage extends TestBase {
 		return driver.getTitle();
 
 	}
+	
+	public boolean validateHomePageTabIsSelected(){
+		new WebDriverWait(driver, 100).until(ExpectedConditions.visibilityOf(tab_Home));
+		return tab_Home.isEnabled();
+	}
 
-	public boolean validateQuarterlyPerformanceLabel() {
-		return quarterlyPerformanceLabel.isDisplayed();
+	public boolean validateQuarterlyPerformanceHeader() {
+		return hdr_quarterlyPerformance.isDisplayed();
 	}
 
 	public LeadsPage clickOnLeadsTab() {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", leadsTab);
-		// leadsTab.click();
+		new WebDriverWait(driver, 100).until(ExpectedConditions.visibilityOf(tab_Leads));
+		js.executeScript("arguments[0].click();", tab_Leads);
 		return new LeadsPage();
 	}
 
 	public AccountsPage clickOnAccountsTab() {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", accountsTab);
+		//js = (JavascriptExecutor) driver;
+		new WebDriverWait(driver, 100).until(ExpectedConditions.visibilityOf(tab_Accounts));
+		js.executeScript("arguments[0].click();", tab_Accounts);
 		return new AccountsPage();
 	}
 
 	public ContactsPage clickOnContactsTab() {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", contactsTab);
+		new WebDriverWait(driver, 100).until(ExpectedConditions.visibilityOf(tab_Contacts));
+		js.executeScript("arguments[0].click();", tab_Contacts);
 		return new ContactsPage();
 	}
 
 	public OpportunitiesPage clickOnOpportunitiesTab() {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", opportunitiesTab);
+		new WebDriverWait(driver, 100).until(ExpectedConditions.visibilityOf(tab_Opportunities));
+		js.executeScript("arguments[0].click();", tab_Opportunities);
 		return new OpportunitiesPage();
 	}
 }

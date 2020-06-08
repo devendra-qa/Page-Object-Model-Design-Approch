@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.sf.qa.tests.AccountsPageTest">
+      <class name="com.sf.qa.tests.ColesLoginPageTest">
         <methods>
+          <include name="verifyRemembermeCheckboxTest"/>
           <include name="tearDown"/>
           <include name="setUp"/>
-          <include name="createNewOpportunityOnAccountTest"/>
         </methods>
-      </class> <!-- com.sf.qa.tests.AccountsPageTest -->
+      </class> <!-- com.sf.qa.tests.ColesLoginPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

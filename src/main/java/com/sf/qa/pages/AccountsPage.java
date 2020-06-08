@@ -15,16 +15,22 @@ import com.sf.qa.util.TestUtil;
 
 public class AccountsPage extends TestBase {
 	TestUtil testUtil;
+	WebDriverWait wait;
 
-	// Accounts landing page OR
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	// Accounts Tab OR
 	@FindBy(xpath = "//span[contains(@class,'forceBreadCrumbItem')]")
 	WebElement pghdr_Accounts;
 
-	@FindBy(xpath = "//div[contains(text(),'New')]")
-	WebElement btn_New;
-
 	@FindBy(xpath = "//span[contains(@class,'selectedListView')]")
 	WebElement listViewAccount;
+
+	@FindBy(xpath = "//div[contains(text(),'New')]")
+	WebElement btn_NewAccount;
+
+	@FindBy(xpath = "//input[@name='Account-search-input']")
+	WebElement tb_AccountSearch;
 
 	@FindBy(xpath = "//table/thead/tr/th[3]/div/a/span[text()='Account Name']")
 	WebElement colAccountName;
@@ -38,10 +44,7 @@ public class AccountsPage extends TestBase {
 	@FindBy(xpath = "//table/thead/tr/th[6]/div/a/span[text()='Account Owner Alias']")
 	WebElement colAccountOwnerAlias;
 
-	@FindBy(xpath = "//input[@name='Account-search-input']")
-	WebElement tb_AccountSearch;
-
-	// New Account window OR
+	// New Account Window OR
 
 	@FindBy(xpath = "(//input[@maxlength='255'])[2]")
 	WebElement tb_AccountName;
@@ -107,14 +110,20 @@ public class AccountsPage extends TestBase {
 	WebElement btn_SaveAndNew;
 
 	@FindBy(xpath = "//button[@title='Save']")
-	WebElement btn_Save;
-	// button[contains(@class,'brand uiButton
-	// forceActionButton')]//span[contains(text(),'Save')]
+	WebElement btn_SaveAccount;
 
-	// Related tab OR
+	// Related Tab OR
 
 	@FindBy(xpath = "//a[@id='relatedListsTab__item']")
 	WebElement tab_RelatedTabOnAccount;
+
+	// Contacts Related List OR
+
+	@FindBy(xpath = "//h2/a/span[@title='Contacts']")
+	WebElement lnk_ContactsRelatedList;
+
+	@FindBy(xpath = "//div[@class='slds-col slds-no-flex slds-grid slds-align-top slds-p-bottom--xx-small test-lvmForceActionsContainer']//ul[@class='branding-actions slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer']//div[@class='slds-truncate'][contains(text(),'New')]")
+	WebElement btn_NewContact;
 
 	// Opportunities Related List OR
 
@@ -130,7 +139,7 @@ public class AccountsPage extends TestBase {
 	@FindBy(xpath = "//div[@class='slds-col slds-no-flex slds-grid slds-align-top slds-p-bottom--xx-small test-lvmForceActionsContainer']//ul[@class='branding-actions slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer']//div[@class='slds-truncate'][contains(text(),'New')]")
 	WebElement btn_NewOpportunity;
 
-	// New Opportunity window OR
+	// New Opportunity Window OR
 
 	@FindBy(xpath = "//input[@maxlength='120']")
 	WebElement tb_OpportunityName;
@@ -157,17 +166,35 @@ public class AccountsPage extends TestBase {
 	WebElement ta_OppDescription;
 
 	@FindBy(xpath = "//button[contains(@class,'uiButton forceActionButton')]/span[contains(@class,'label bBody')][(text()='Save')]")
-	WebElement btn_OppSave;
+	WebElement btn_SaveOpportunity;
 
 	@FindBy(xpath = "//ul[@class='errorsList']/li")
 	WebElement msg_OppError;
+
+	// Cases Related List OR
+	@FindBy(xpath = "//h2/a/span[@title='Cases']")
+	WebElement lnk_CasesRelatedList;
+
+	// Notes & Attachments OR
+
+	@FindBy(xpath = "//span[contains(text(),'Notes & Attachments')]")
+	WebElement lnk_NotesAndAttachmentsRelatedList;
+
+	@FindBy(xpath = "//h1[contains(text(),'Notes & Attachments')]")
+	WebElement pghdr_NotesAndAttachments;
+
+	@FindBy(xpath = "//div[contains(@class,'lvmForceActionsContainer')]//div[contains(text(),'Upload Files')]")
+	WebElement btn_UploadFiles;
+
+	@FindBy(xpath = "//span[contains(text(),'Done')]")
+	WebElement btn_Done;
 
 	// Initialize page factory elements
 	public AccountsPage() {
 		PageFactory.initElements(driver, this);
 	}
 
-	// Actions
+	// Accounts Tab Actions
 	public String validatePageTitleAccounts() {
 		return driver.getTitle();
 	}
@@ -192,7 +219,7 @@ public class AccountsPage extends TestBase {
 	}
 
 	public void clickNewButton() {
-		btn_New.click();
+		btn_NewAccount.click();
 	}
 
 	public boolean validateAccountNameTextbox() {
@@ -272,26 +299,13 @@ public class AccountsPage extends TestBase {
 	}
 
 	public void clickSaveButton() {
-		btn_Save.click();
+		btn_SaveAccount.click();
 	}
 
 	public String validateRequiredFieldsErrorMessage() {
 		msgError.isDisplayed();
 		String msg = msgError.getText();
 		return msg;
-	}
-
-	// New Opportunity actions
-	public void clickNewButtonOnOpportunityRelatedList() {
-		/*
-		 * JavascriptExecutor executor = (JavascriptExecutor) driver;
-		 * executor.executeScript("arguments[0].click();", btn_NewOpportunity);
-		 */
-		btn_NewOpportunity.click();
-	}
-
-	public void clickSaveOpportunityButtton() {
-		btn_OppSave.click();
 	}
 
 	public void createNewAccount(String aName, String rat, String phn, String ws, String typ, String os, String ind,
@@ -329,31 +343,38 @@ public class AccountsPage extends TestBase {
 	}
 
 	public void selectAccountName(String aName) {
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(tb_AccountSearch));
 		tb_AccountSearch.sendKeys(aName);
 		tb_AccountSearch.sendKeys(Keys.ENTER);
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		WebElement e1e = driver.findElement(By.xpath("//table/tbody/tr/th[1]/span/a"));
-		e1e.click();
+		WebElement e1e = driver.findElement(By.xpath("//table/tbody/tr/th/span/a"));
+		js.executeScript("arguments[0].click();", e1e);
+
 	}
 
-	// Related tab actions
+	// Account Related Tab Actions
 	public void validateRelatedTabOnAccountIsSelected() {
-		tab_RelatedTabOnAccount.isDisplayed();
-		if (!tab_RelatedTabOnAccount.isSelected())
+		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(tab_RelatedTabOnAccount));
+		if (tab_RelatedTabOnAccount.isEnabled()) {
+			System.out.println("Related tab is aleready selected");
+		} else {
 			tab_RelatedTabOnAccount.click();
+		}
+
 	}
 
-	// Opportunities related list actions
+	// Opportunities Related List Actions
 	public void clickOpportunitiesRelatedListLink() {
 		lnk_OpportunitiesRelatedList.isDisplayed();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", lnk_OpportunitiesRelatedList);
-		// lnk_OpportunitiesRelatedList.click();
+	}
+
+	public void clickNewButtonOnOpportunityRelatedList() {
+		btn_NewOpportunity.click();
+	}
+
+	public void clickSaveOpportunityButtton() {
+		btn_SaveOpportunity.click();
 	}
 
 	public void createNewOpportunityOnAccount(String on, String tp, String ls, String am, String cd, String stg,
@@ -374,6 +395,27 @@ public class AccountsPage extends TestBase {
 		WebElement e3 = driver.findElement(By.xpath("//a[contains(text(),'" + stg + "')]"));
 		e3.click();
 		ta_OppDescription.sendKeys(des);
+	}
+
+	// Notes & Attachments Related List Actions
+
+	public void clickNotesAndAttachmentsRelatedListLink() {
+		lnk_NotesAndAttachmentsRelatedList.isDisplayed();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", lnk_NotesAndAttachmentsRelatedList);
+	}
+
+	public void validateNotesAndAttachmentsPageHeader() {
+		pghdr_NotesAndAttachments.isDisplayed();
+	}
+
+	public void validateUploadFiles() {
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(btn_UploadFiles));
+		btn_UploadFiles.click();
+	}
+
+	public void clickDoneButton() {
+		btn_Done.click();
 	}
 
 }

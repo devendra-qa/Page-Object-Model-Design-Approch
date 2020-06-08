@@ -1,7 +1,11 @@
 package com.sf.qa.tests;
 
+import static org.testng.Assert.assertTrue;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +25,7 @@ public class AccountsPageTest extends TestBase {
 	HomePage homePage;
 	AccountsPage accountsPage;
 
-	String sheetName = "opportunities";
+	/* String sheetName = "opportunities"; */
 
 	public AccountsPageTest() {
 		super();
@@ -34,11 +38,10 @@ public class AccountsPageTest extends TestBase {
 		homePage = new HomePage();
 		accountsPage = new AccountsPage();
 		homePage = loginPage.validateLogin(prop.getProperty("username"), prop.getProperty("password"));
-		try {
-			Thread.sleep(100000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(100000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		accountsPage = homePage.clickOnAccountsTab();
 	}
 
@@ -102,13 +105,12 @@ public class AccountsPageTest extends TestBase {
 		Assert.assertEquals(aErrorMsg, eErrorMsg, "Error message doen not match");
 	}
 
-	@DataProvider
-	public Object[][] getSFTestData() {
-		Object data[][] = TestUtil.getTestData(sheetName);
-		return data;
-	}
+	/*
+	 * @DataProvider public Object[][] getSFTestData() { Object data[][] =
+	 * TestUtil.getTestData(sheetName); return data; }
+	 */
 
-	@Test(priority = 7, dataProvider = "getSFTestData")
+	@Test(priority = 7, dataProvider = "getAccoTestData", dataProviderClass = DataProviderClass.class)
 	public void createNewAccountTest(String accountName, String rating, String phone, String website, String type,
 			String ownership, String industry, String billingStreet, String billingCity, String billingState,
 			String billingZip, String billingCountry, String shippingStreet, String shippingCity, String shippingState,
@@ -130,30 +132,44 @@ public class AccountsPageTest extends TestBase {
 		accountsPage.selectAccountName("ABC Corp");
 	}
 
-	/*@DataProvider
-	public Object[][] getSFTestData() {
-		Object data[][] = TestUtil.getTestData(sheetName);
-		return data;
-	}*/
-	@Test(priority = 9, dataProvider = "getSFTestData")
-	public void createNewOpportunityOnAccountTest(String opportunityName, String type, String leadSource, String amount, String closeDate,
-			String stage, String description) {
+	@Test(priority = 9, dataProvider = "getOppTestData", dataProviderClass = DataProviderClass.class)
+	public void createNewOpportunityOnAccountTest(String opportunityName, String type, String leadSource, String amount,
+			String closeDate, String stage, String description) {
 		accountsPage.selectAccountName("ABC Corp");
 		accountsPage.validateRelatedTabOnAccountIsSelected();
 		accountsPage.clickOpportunitiesRelatedListLink();
 		accountsPage.clickNewButtonOnOpportunityRelatedList();
-		/*try {
-			Thread.sleep(50000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}*/
-		accountsPage.createNewOpportunityOnAccount("ABC Corp "+opportunityName, type, leadSource, amount, closeDate, stage, description);
+		accountsPage.createNewOpportunityOnAccount("ABC Corp " + opportunityName, type, leadSource, amount, closeDate,
+				stage, description);
 		accountsPage.clickSaveOpportunityButtton();
 		try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void uploadFileTest() {
+		accountsPage.selectAccountName("ABC Corp");
+		accountsPage.clickNotesAndAttachmentsRelatedListLink();
+		accountsPage.validateUploadFiles();
+		/*try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		TestUtil.uploadFile("D:\\sample test files\\testsPNGFile.png");
+		accountsPage.clickDoneButton();
+
+	}
+	
+	@Test
+	public void vaidateRelatedTabIsSelected(){
+		accountsPage.selectAccountName("ABC Corp");
+		accountsPage.validateRelatedTabOnAccountIsSelected();
+
 	}
 
 	@AfterMethod()

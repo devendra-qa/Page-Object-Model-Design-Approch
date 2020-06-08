@@ -1,17 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="92" started-at="2020-06-03T11:01:45Z" finished-at="2020-06-03T11:01:45Z">
+  <suite name="Default suite" duration-ms="68847" started-at="2020-06-08T09:23:08Z" finished-at="2020-06-08T09:24:17Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="92" started-at="2020-06-03T11:01:45Z" finished-at="2020-06-03T11:01:45Z">
-      <class name="com.sf.qa.tests.sampleTest">
-        <test-method status="PASS" signature="newDate()[pri:0, instance:com.sf.qa.tests.sampleTest@604ed9f0]" name="newDate" duration-ms="35" started-at="2020-06-03T11:01:45Z" finished-at="2020-06-03T11:01:45Z">
+    <test name="Default test" duration-ms="68847" started-at="2020-06-08T09:23:08Z" finished-at="2020-06-08T09:24:17Z">
+      <class name="com.sf.qa.tests.ColesLoginPageTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="setUp" is-config="true" duration-ms="12162" started-at="2020-06-08T09:23:08Z" finished-at="2020-06-08T09:23:20Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- newDate -->
-      </class> <!-- com.sf.qa.tests.sampleTest -->
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="verifyLoginPageTitleTest()[pri:1, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="verifyLoginPageTitleTest" duration-ms="113" started-at="2020-06-08T09:23:20Z" finished-at="2020-06-08T09:23:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginPageTitleTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="tearDown" is-config="true" duration-ms="1553" started-at="2020-06-08T09:23:20Z" finished-at="2020-06-08T09:23:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="setUp" is-config="true" duration-ms="10391" started-at="2020-06-08T09:23:22Z" finished-at="2020-06-08T09:23:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="verifySalesforceLogoTest()[pri:2, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="verifySalesforceLogoTest" duration-ms="140" started-at="2020-06-08T09:23:32Z" finished-at="2020-06-08T09:23:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySalesforceLogoTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="tearDown" is-config="true" duration-ms="1512" started-at="2020-06-08T09:23:32Z" finished-at="2020-06-08T09:23:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="setUp" is-config="true" duration-ms="10305" started-at="2020-06-08T09:23:34Z" finished-at="2020-06-08T09:23:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="verifyForgotPasswordLinkTest()[pri:3, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="verifyForgotPasswordLinkTest" duration-ms="611" started-at="2020-06-08T09:23:44Z" finished-at="2020-06-08T09:23:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyForgotPasswordLinkTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="tearDown" is-config="true" duration-ms="1725" started-at="2020-06-08T09:23:45Z" finished-at="2020-06-08T09:23:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="setUp" is-config="true" duration-ms="11747" started-at="2020-06-08T09:23:46Z" finished-at="2020-06-08T09:23:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="verifyRemembermeCheckboxTest()[pri:4, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="verifyRemembermeCheckboxTest" duration-ms="41" started-at="2020-06-08T09:23:58Z" finished-at="2020-06-08T09:23:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyRemembermeCheckboxTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="tearDown" is-config="true" duration-ms="1637" started-at="2020-06-08T09:23:58Z" finished-at="2020-06-08T09:24:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="setUp" is-config="true" duration-ms="10404" started-at="2020-06-08T09:24:00Z" finished-at="2020-06-08T09:24:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="verifyUserLoginTest()[pri:5, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="verifyUserLoginTest" duration-ms="5093" started-at="2020-06-08T09:24:10Z" finished-at="2020-06-08T09:24:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUserLoginTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sf.qa.tests.ColesLoginPageTest@f6c48ac]" name="tearDown" is-config="true" duration-ms="1339" started-at="2020-06-08T09:24:15Z" finished-at="2020-06-08T09:24:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.sf.qa.tests.ColesLoginPageTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
